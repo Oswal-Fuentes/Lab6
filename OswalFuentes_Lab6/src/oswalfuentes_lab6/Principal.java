@@ -7,7 +7,7 @@ package oswalfuentes_lab6;
 
 /**
  *
- * @author ALAMEDA
+ * @author Oswal
  */
 public class Principal extends javax.swing.JFrame {
 
