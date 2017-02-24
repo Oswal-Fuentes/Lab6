@@ -9,12 +9,13 @@ package oswalfuentes_lab6;
  *
  * @author Oswal
  */
-public class Restaurantes extends Lugar{
-    
+public class Restaurantes extends Lugar {
+
     private String categoria;
     int calificacion;
 
     public Restaurantes() {
+        super();
     }
 
     public Restaurantes(String categoria, int calificacion, String nombre, String direccion, int seguridad) {
@@ -43,7 +44,5 @@ public class Restaurantes extends Lugar{
     public String toString() {
         return "Restaurantes{" + "categoria=" + categoria + ", calificacion=" + calificacion + '}';
     }
-    
-    
-    
+
 }

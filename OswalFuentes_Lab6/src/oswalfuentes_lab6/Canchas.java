@@ -14,6 +14,7 @@ public class Canchas extends Lugar{
     private String categoria,estado;
 
     public Canchas() {
+        super();
     }
 
     public Canchas(String categoria, String estado, String nombre, String direccion, int seguridad) {

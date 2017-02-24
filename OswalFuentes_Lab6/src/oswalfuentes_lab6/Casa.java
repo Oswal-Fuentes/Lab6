@@ -12,6 +12,7 @@ package oswalfuentes_lab6;
 public class Casa extends Lugar {
 
     public Casa() {
+        super();
     }
 
     public Casa(String nombre, String direccion, int seguridad) {

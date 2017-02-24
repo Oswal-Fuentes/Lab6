@@ -21,7 +21,7 @@ public class Lugar {
     public Lugar() {
     }
 
-    public Lugar(String nombre, String direccion, int seguridad, Carretera c_salida) {
+    public Lugar(String nombre, String direccion, int seguridad) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.seguridad = seguridad;
