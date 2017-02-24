@@ -6,6 +6,9 @@
 package oswalfuentes_lab6;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,7 +34,7 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        TabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -59,30 +62,60 @@ public class Principal extends javax.swing.JFrame {
         tf_distancia = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cb_lugarinicio = new javax.swing.JComboBox<>();
+        cb_lugarfinal = new javax.swing.JComboBox<>();
+        bt_crearc = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        rb_rest1 = new javax.swing.JRadioButton();
-        rb_cancha1 = new javax.swing.JRadioButton();
-        rb_casa1 = new javax.swing.JRadioButton();
+        rb_rest2 = new javax.swing.JRadioButton();
+        rb_cancha2 = new javax.swing.JRadioButton();
+        rb_carreteras = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jt_listar = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        TabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                TabbedPaneStateChanged(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
         jLabel2.setText("Direccion");
 
-        jLabel3.setText("Nivel de seguridad");
+        jLabel3.setText("Nivel de seguridad (num)");
 
         buttonGroup1.add(rb_rest);
         rb_rest.setText("Restaurante");
         rb_rest.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         rb_rest.setInheritsPopupMenu(true);
+        rb_rest.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rb_restMouseClicked(evt);
+            }
+        });
 
+        buttonGroup1.add(rb_cancha);
         rb_cancha.setText("Cancha");
+        rb_cancha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rb_canchaMouseClicked(evt);
+            }
+        });
 
+        buttonGroup1.add(rb_casa);
         rb_casa.setText("Casa");
+        rb_casa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rb_casaMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Tipo de lugar");
@@ -158,7 +191,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jLabel3)))
                         .addGap(18, 18, 18)
                         .addComponent(tf_nivelseguridad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,10 +225,10 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(tf_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(36, 36, 36)
                 .addComponent(bt_crearlugar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Crear lugar", jPanel1);
+        TabbedPane.addTab("Crear lugar", jPanel1);
 
         jLabel9.setText("Numero");
 
@@ -205,37 +238,49 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel12.setText("Lugar final");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_lugarinicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cb_lugarfinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        bt_crearc.setText("Crear carretera");
+        bt_crearc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_crearcMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(216, 216, 216)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel9))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_numeroc, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                            .addComponent(tf_distancia)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel11)
-                                .addGap(18, 18, 18))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(36, 36, 36)))
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, 100, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(294, Short.MAX_VALUE))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tf_numeroc, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                                    .addComponent(tf_distancia)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(18, 18, 18))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(36, 36, 36)))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cb_lugarinicio, 0, 100, Short.MAX_VALUE)
+                                    .addComponent(cb_lugarfinal, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(230, 230, 230)
+                        .addComponent(bt_crearc, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(289, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,63 +296,125 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cb_lugarinicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(175, Short.MAX_VALUE))
+                    .addComponent(cb_lugarfinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(bt_crearc, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Crear carretera", jPanel2);
+        TabbedPane.addTab("Crear carretera", jPanel2);
 
-        buttonGroup2.add(rb_rest1);
-        rb_rest1.setText("Restaurante");
-        rb_rest1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        rb_rest1.setInheritsPopupMenu(true);
+        buttonGroup2.add(rb_rest2);
+        rb_rest2.setText("Restaurantes");
+        rb_rest2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        rb_rest2.setInheritsPopupMenu(true);
+        rb_rest2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_rest2ActionPerformed(evt);
+            }
+        });
 
-        rb_cancha1.setText("Cancha");
+        buttonGroup2.add(rb_cancha2);
+        rb_cancha2.setText("Canchas");
+        rb_cancha2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_cancha2ActionPerformed(evt);
+            }
+        });
 
-        rb_casa1.setText("Casa");
+        buttonGroup2.add(rb_carreteras);
+        rb_carreteras.setText("Carreteras");
+        rb_carreteras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rb_carreterasActionPerformed(evt);
+            }
+        });
+
+        jt_listar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Direccion", "Seguridad"
+            }
+        ));
+        jScrollPane1.setViewportView(jt_listar);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(190, 190, 190)
-                .addComponent(rb_rest1)
-                .addGap(33, 33, 33)
-                .addComponent(rb_cancha1)
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(216, 216, 216)
+                .addComponent(rb_rest2)
                 .addGap(18, 18, 18)
-                .addComponent(rb_casa1)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addComponent(rb_cancha2)
+                .addGap(18, 18, 18)
+                .addComponent(rb_carreteras)
+                .addContainerGap(220, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rb_rest1)
-                    .addComponent(rb_cancha1)
-                    .addComponent(rb_casa1))
-                .addContainerGap(371, Short.MAX_VALUE))
+                    .addComponent(rb_rest2)
+                    .addComponent(rb_cancha2)
+                    .addComponent(rb_carreteras))
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Listado con tabla", jPanel3);
+        TabbedPane.addTab("Listado con tabla", jPanel3);
+
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(jTree1);
+
+        jRadioButton1.setText("Restaurantes");
+
+        jRadioButton2.setText("Canchas");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(173, 173, 173)
+                        .addComponent(jRadioButton1)
+                        .addGap(42, 42, 42)
+                        .addComponent(jRadioButton2)))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 440, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton1)
+                    .addComponent(jRadioButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
 
-        jTabbedPane1.addTab("Listado con arbol", jPanel4);
+        TabbedPane.addTab("Listado con arbol", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,14 +422,14 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(TabbedPane)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(TabbedPane)
                 .addContainerGap())
         );
 
@@ -341,17 +448,156 @@ public class Principal extends javax.swing.JFrame {
             categoria = (String) cb_categoria.getSelectedItem();
             calificacion = Integer.parseInt((String) cb_calificacion.getSelectedItem());
             lugares.add(new Restaurantes(categoria, calificacion, nombre, direccion, seguridad));
+            JOptionPane.showMessageDialog(null, "Ha creado el lugar exitosamente!");
         }
         if (rb_cancha.isSelected()) {
             String categoria, estado;
             categoria = (String) cb_categoriac.getSelectedItem();
             estado = tf_estado.getText();
             lugares.add(new Canchas(categoria, estado, nombre, direccion, seguridad));
+            JOptionPane.showMessageDialog(null, "Ha creado el lugar exitosamente!");
         }
         if (rb_casa.isSelected()) {
             lugares.add(new Casa(nombre, direccion, seguridad));
+            JOptionPane.showMessageDialog(null, "Ha creado el lugar exitosamente!");
         }
+        tf_nombre.setText("");
+        tf_direccion.setText("");
+        tf_nivelseguridad.setText("");
+        tf_estado.setText("");
     }//GEN-LAST:event_bt_crearlugarMouseClicked
+
+    private void TabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_TabbedPaneStateChanged
+        if (TabbedPane.getSelectedIndex() == 1) {
+            DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+            DefaultComboBoxModel model2 = new DefaultComboBoxModel();
+            for (int i = 0; i < lugares.size(); i++) {
+                model1.addElement(lugares.get(i).getNombre());
+                model2.addElement(lugares.get(i).getNombre());
+            }
+            cb_lugarinicio.setModel(model1);
+            cb_lugarfinal.setModel(model2);
+        }
+    }//GEN-LAST:event_TabbedPaneStateChanged
+
+    private void rb_restMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rb_restMouseClicked
+        if (rb_rest.isSelected()) {
+            cb_categoriac.setEnabled(false);
+            tf_estado.setEnabled(false);
+            cb_categoria.setEnabled(true);
+            cb_calificacion.setEnabled(true);
+        }
+    }//GEN-LAST:event_rb_restMouseClicked
+
+    private void rb_canchaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rb_canchaMouseClicked
+        if (rb_cancha.isSelected()) {
+            cb_categoriac.setEnabled(true);
+            tf_estado.setEnabled(true);
+            cb_categoria.setEnabled(false);
+            cb_calificacion.setEnabled(false);
+        }
+    }//GEN-LAST:event_rb_canchaMouseClicked
+
+    private void rb_casaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rb_casaMouseClicked
+        if (rb_casa.isSelected()) {
+            cb_categoriac.setEnabled(false);
+            tf_estado.setEnabled(false);
+            cb_categoria.setEnabled(false);
+            cb_calificacion.setEnabled(false);
+        }
+    }//GEN-LAST:event_rb_casaMouseClicked
+
+    private void bt_crearcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crearcMouseClicked
+        int numero, distancia;
+        Lugar lugar_inicio, lugar_final;
+        numero = Integer.parseInt(tf_numeroc.getText());
+        distancia = Integer.parseInt(tf_distancia.getText());
+        int pos = cb_lugarinicio.getSelectedIndex();
+        int pos2 = cb_lugarfinal.getSelectedIndex();
+        lugar_inicio = lugares.get(pos);;
+        lugar_final = lugares.get(pos2);
+        carreteras.add(new Carretera(numero, distancia, lugar_inicio, lugar_final));
+        int pos3 = cb_lugarinicio.getSelectedIndex();
+        int pos4 = cb_lugarfinal.getSelectedIndex();
+        lugares.get(pos).setC_salida(carreteras.get(carreteras.size() - 1));
+        lugares.get(pos2).setC_entrada(carreteras.get(carreteras.size() - 1));
+        tf_numeroc.setText("");
+        tf_distancia.setText("");
+        JOptionPane.showMessageDialog(null, "Se ha creado la carretera!");
+    }//GEN-LAST:event_bt_crearcMouseClicked
+
+    private void rb_rest2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_rest2ActionPerformed
+
+        jt_listar.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Nombre", "Direccion", "Nivel de seguridad", "Carretera de entrada", "Carretera de salida", "Categoria", "Calificacion"
+                }
+        ));
+        DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+        for (int i = 0; i < lugares.size(); i++) {
+            if (lugares.get(i) instanceof Restaurantes) {
+                Object[] row = {
+                    lugares.get(i).getNombre(),
+                    lugares.get(i).getDireccion(),
+                    lugares.get(i).getSeguridad(),
+                    lugares.get(i).getC_entrada(),
+                    lugares.get(i).getC_salida(),
+                    ((Restaurantes) lugares.get(i)).getCategoria(),
+                    ((Restaurantes) lugares.get(i)).getCalificacion()
+                };
+                modelo.addRow(row);
+            }
+            jt_listar.setModel(modelo);
+        }
+    }//GEN-LAST:event_rb_rest2ActionPerformed
+
+    private void rb_cancha2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_cancha2ActionPerformed
+        jt_listar.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Nombre", "Direccion", "Nivel de seguridad", "Carretera de entrada", "Carretera de salida", "Categoria", "Estado"
+                }
+        ));
+        DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+        for (int i = 0; i < lugares.size(); i++) {
+            if (lugares.get(i) instanceof Canchas) {
+                Object[] row = {
+                    lugares.get(i).getNombre(),
+                    lugares.get(i).getDireccion(),
+                    lugares.get(i).getSeguridad(),
+                    lugares.get(i).getC_entrada(),
+                    lugares.get(i).getC_salida(),
+                    ((Canchas) lugares.get(i)).getCategoria(),
+                    ((Canchas) lugares.get(i)).getEstado()
+                };
+                modelo.addRow(row);
+            }
+            jt_listar.setModel(modelo);
+        }
+    }//GEN-LAST:event_rb_cancha2ActionPerformed
+
+    private void rb_carreterasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rb_carreterasActionPerformed
+        jt_listar.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "Numero", "Distancia", "Lugar de inicio", "Lugar final"
+                }
+        ));
+        DefaultTableModel modelo = (DefaultTableModel) jt_listar.getModel();
+        for (int i = 0; i < carreteras.size(); i++) {
+            if (carreteras.get(i) instanceof Carretera) {
+                Object[] row = {
+                    carreteras.get(i).getNumero(),
+                    carreteras.get(i).getDistancia(),
+                    carreteras.get(i).getLugar_inicio(),
+                    carreteras.get(i).getLugar_final()
+                };
+                modelo.addRow(row);
+            }
+            jt_listar.setModel(modelo);
+        }
+    }//GEN-LAST:event_rb_carreterasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -389,14 +635,16 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane TabbedPane;
+    private javax.swing.JButton bt_crearc;
     private javax.swing.JButton bt_crearlugar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cb_calificacion;
     private javax.swing.JComboBox<String> cb_categoria;
     private javax.swing.JComboBox<String> cb_categoriac;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cb_lugarfinal;
+    private javax.swing.JComboBox<String> cb_lugarinicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -413,13 +661,18 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTree jTree1;
+    private javax.swing.JTable jt_listar;
     private javax.swing.JRadioButton rb_cancha;
-    private javax.swing.JRadioButton rb_cancha1;
+    private javax.swing.JRadioButton rb_cancha2;
+    private javax.swing.JRadioButton rb_carreteras;
     private javax.swing.JRadioButton rb_casa;
-    private javax.swing.JRadioButton rb_casa1;
     private javax.swing.JRadioButton rb_rest;
-    private javax.swing.JRadioButton rb_rest1;
+    private javax.swing.JRadioButton rb_rest2;
     private javax.swing.JTextField tf_direccion;
     private javax.swing.JTextField tf_distancia;
     private javax.swing.JTextField tf_estado;
@@ -428,4 +681,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tf_numeroc;
     // End of variables declaration//GEN-END:variables
     ArrayList<Lugar> lugares = new ArrayList();
+    ArrayList<Carretera> carreteras = new ArrayList();
 }

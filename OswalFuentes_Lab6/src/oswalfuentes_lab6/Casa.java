@@ -45,7 +45,7 @@ public class Casa extends Lugar {
 
     @Override
     public String toString() {
-        return "Casa{" + '}';
+        return nombre;
     }
 
     

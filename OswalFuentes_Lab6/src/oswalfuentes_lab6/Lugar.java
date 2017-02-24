@@ -15,7 +15,7 @@ public class Lugar {
 
     protected String nombre, direccion;
     protected int seguridad;
-    ArrayList<Carretera> c_entradas = new ArrayList();
+    Carretera c_entrada; 
     Carretera c_salida;
 
     public Lugar() {
@@ -52,12 +52,12 @@ public class Lugar {
         this.seguridad = seguridad;
     }
 
-    public ArrayList<Carretera> getC_entradas() {
-        return c_entradas;
+    public Carretera getC_entrada() {
+        return c_entrada;
     }
 
-    public void setC_entradas(ArrayList<Carretera> c_entradas) {
-        this.c_entradas = c_entradas;
+    public void setC_entrada(Carretera c_entrada) {
+        this.c_entrada = c_entrada;
     }
 
     public Carretera getC_salida() {
@@ -70,7 +70,7 @@ public class Lugar {
 
     @Override
     public String toString() {
-        return "Lugar{" + "nombre=" + nombre + ", direccion=" + direccion + ", seguridad=" + seguridad + ", c_entradas=" + c_entradas + ", c_salida=" + c_salida + '}';
+        return "Lugar{" + "nombre=" + nombre + ", direccion=" + direccion + ", seguridad=" + seguridad + ", c_entradas=" + c_entrada + ", c_salida=" + c_salida + '}';
     }
 
     

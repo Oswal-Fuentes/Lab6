@@ -42,7 +42,7 @@ public class Restaurantes extends Lugar {
 
     @Override
     public String toString() {
-        return "Restaurantes{" + "categoria=" + categoria + ", calificacion=" + calificacion + '}';
+        return nombre;
     }
 
 }
