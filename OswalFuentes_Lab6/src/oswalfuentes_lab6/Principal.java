@@ -14,7 +14,7 @@ import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
- * @author Oswal
+ * @author Oswal Fuentes
  */
 public class Principal extends javax.swing.JFrame {
 
