@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -34,6 +36,7 @@ public class Principal extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         TabbedPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -73,7 +76,7 @@ public class Principal extends javax.swing.JFrame {
         jt_listar = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        Tree_listar = new javax.swing.JTree();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
 
@@ -191,7 +194,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jLabel3)))
                         .addGap(18, 18, 18)
                         .addComponent(tf_nivelseguridad, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -280,7 +283,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(230, 230, 230)
                         .addComponent(bt_crearc, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(382, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -361,7 +364,7 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(rb_cancha2)
                 .addGap(18, 18, 18)
                 .addComponent(rb_carreteras)
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -379,12 +382,24 @@ public class Principal extends javax.swing.JFrame {
         TabbedPane.addTab("Listado con tabla", jPanel3);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Categorias");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane2.setViewportView(jTree1);
+        Tree_listar.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane2.setViewportView(Tree_listar);
 
+        buttonGroup3.add(jRadioButton1);
         jRadioButton1.setText("Restaurantes");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
+        buttonGroup3.add(jRadioButton2);
         jRadioButton2.setText("Canchas");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -393,14 +408,14 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(63, 63, 63)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
+                        .addGap(249, 249, 249)
                         .addComponent(jRadioButton1)
                         .addGap(42, 42, 42)
                         .addComponent(jRadioButton2)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -449,6 +464,7 @@ public class Principal extends javax.swing.JFrame {
             calificacion = Integer.parseInt((String) cb_calificacion.getSelectedItem());
             lugares.add(new Restaurantes(categoria, calificacion, nombre, direccion, seguridad));
             JOptionPane.showMessageDialog(null, "Ha creado el lugar exitosamente!");
+
         }
         if (rb_cancha.isSelected()) {
             String categoria, estado;
@@ -599,6 +615,76 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rb_carreterasActionPerformed
 
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        DefaultTreeModel m = (DefaultTreeModel) Tree_listar.getModel();
+        DefaultMutableTreeNode Categorias = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode chino;
+        chino = new DefaultMutableTreeNode(new String("Chino"));
+        Categorias.add(chino);
+        DefaultMutableTreeNode mexicano;
+        mexicano = new DefaultMutableTreeNode(new String("Mexicano"));
+        Categorias.add(mexicano);
+        DefaultMutableTreeNode italiano;
+        italiano = new DefaultMutableTreeNode(new String("Italiano"));
+        Categorias.add(italiano);
+        DefaultMutableTreeNode comida_rapida;
+        comida_rapida = new DefaultMutableTreeNode(new String("Comida Rapida"));
+        Categorias.add(comida_rapida);
+        for (int i = 0; i < lugares.size(); i++) {
+            if (lugares.get(i) instanceof Restaurantes) {
+                DefaultMutableTreeNode n;
+                n = new DefaultMutableTreeNode(new String(lugares.get(i).getNombre()));
+                if (((Restaurantes) lugares.get(i)).getCategoria().equals("Chino")) {
+                    chino.add(n);
+                }
+                if (((Restaurantes) lugares.get(i)).getCategoria().equals("Mexicano")) {
+                    mexicano.add(n);
+                }
+                if (((Restaurantes) lugares.get(i)).getCategoria().equals("Italiano")) {
+                    italiano.add(n);
+                }
+                if (((Restaurantes) lugares.get(i)).getCategoria().equals("Comida rapida")) {
+                    comida_rapida.add(n);
+                }
+            }
+        }
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        DefaultTreeModel m = (DefaultTreeModel) Tree_listar.getModel();
+        DefaultMutableTreeNode Categorias = (DefaultMutableTreeNode) m.getRoot();
+        DefaultMutableTreeNode Football;
+        Football = new DefaultMutableTreeNode(new String("Football"));
+        Categorias.add(Football);
+        DefaultMutableTreeNode Básquet;
+        Básquet = new DefaultMutableTreeNode(new String("Básquet"));
+        Categorias.add(Básquet);
+        DefaultMutableTreeNode Tenis;
+        Tenis = new DefaultMutableTreeNode(new String("Tenis"));
+        Categorias.add(Tenis);
+        DefaultMutableTreeNode Volley;
+        Volley = new DefaultMutableTreeNode(new String("Volley"));
+        Categorias.add(Volley);
+        for (int i = 0; i < lugares.size(); i++) {
+            if (lugares.get(i) instanceof Canchas) {
+                DefaultMutableTreeNode n;
+                n = new DefaultMutableTreeNode(new String(lugares.get(i).getNombre()));
+                if (((Canchas) lugares.get(i)).getCategoria().equals("Football")) {
+                    Football.add(n);
+                }
+                if (((Canchas) lugares.get(i)).getCategoria().equals("Básquet")) {
+                    Básquet.add(n);
+                }
+                if (((Canchas) lugares.get(i)).getCategoria().equals("Tenis")) {
+                    Tenis.add(n);
+                }
+                if (((Canchas) lugares.get(i)).getCategoria().equals("Volley")) {
+                    Volley.add(n);
+                }
+            }
+        }
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -636,10 +722,12 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabbedPane;
+    private javax.swing.JTree Tree_listar;
     private javax.swing.JButton bt_crearc;
     private javax.swing.JButton bt_crearlugar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JComboBox<String> cb_calificacion;
     private javax.swing.JComboBox<String> cb_categoria;
     private javax.swing.JComboBox<String> cb_categoriac;
@@ -665,7 +753,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTree jTree1;
     private javax.swing.JTable jt_listar;
     private javax.swing.JRadioButton rb_cancha;
     private javax.swing.JRadioButton rb_cancha2;
